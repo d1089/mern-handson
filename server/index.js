@@ -1,18 +1,16 @@
 const express = require("express")
 const mongoose = require("mongoose")
 const app = express()
-
+const port = 3002
 const AnimeModel = require("./models/Anime")
-
-app.use(express.json)
 
 mongoose.connect("mongodb+srv://dbuser:admin@crud.dlk48.mongodb.net/My?retryWrites=true&w=majority", {
     useNewUrlParser: true,
 })
 
-app.get("/", async (req, res) => {
+app.get("/", async(req, res) => {
     console.log("inside get");
-    const anime = new AnimeModel({ animeName: "Naruto", seasonWatched: 2})
+    const anime = new AnimeModel({ animeName: "FutureDiary", seasonWatched: 0.5})
     try{
         await anime.save()
         res.send("record inserted..");
@@ -21,6 +19,6 @@ app.get("/", async (req, res) => {
     }
 })
 
-app.listen(4012, () => {
-    console.log("Server is up on 4012")
+app.listen(port, () => {
+    console.log(`Server is up on port ${port}`)
 })
